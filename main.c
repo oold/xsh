@@ -9,6 +9,7 @@
 #include <signal.h>
 #include <locale.h>
 #include <unistd.h>
+#include <sys/wait.h>
 
 #include "config.h"
 #include "read.h"
