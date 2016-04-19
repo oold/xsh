@@ -26,5 +26,5 @@ void print_prompt() {
     fputs("Cannot get path name\n", stderr);
     exit(EXIT_FAILURE);
   }
-  printf("%s > ", wd);
+  printf("%s> ", wd);
 }
