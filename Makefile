@@ -2,10 +2,11 @@ CC = /usr/bin/gcc
 CFLAGS = -Wall -Wpedantic
 NAME = xsh
 CFILES = main.c read.c signals.c log.c util.c
+OLEVEL = 3
 
 default:
 	mkdir -p release
-	$(CC) $(CFLAGS) -O2 -o release/$(NAME) $(CFILES)
+	$(CC) $(CFLAGS) -O$(OLEVEL) -o release/$(NAME) $(CFILES)
 
 debug:
 	mkdir -p debug
