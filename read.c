@@ -12,16 +12,16 @@
 
 char read_str(char *str);
 
-void read_command(char **par) {
+void read_command(char **par, size_t *argc) {
   print_prompt();
-  size_t i = 0;
+  *argc = 0;
   while (1) {
-    par[i] = malloc(COMMAND_LENGTH * sizeof(char));
-    if (read_str(par[i]) == '\n') {
-      par[i + 1] = NULL;
+    par[*argc] = malloc(COMMAND_LENGTH * sizeof(char));
+    if (read_str(par[*argc]) == '\n') {
+      par[*argc + 1] = NULL;
       break;
     }
-    if (++i == PARAMETERS_SIZE - 1) {
+    if (++*argc == PARAMETERS_SIZE - 1) {
       fputs("Too many parameters!\n", stderr);
       exit(EXIT_FAILURE);
     }

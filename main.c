@@ -33,7 +33,9 @@ int main() {
   open_log();
   
   while (1) {
-    read_command(parameters);
+    size_t arg_count;
+    
+    read_command(parameters, &arg_count);
     
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wincompatible-pointer-types-discards-qualifiers"
@@ -50,16 +52,13 @@ int main() {
       continue;
     }
     
-    { // Checking for & character at end of command
-      size_t i = 1;
-      while (parameters[++i] != NULL);
-      if (parameters[--i] && !strcmp(parameters[i], "&")) {
-        child_in_fg = false;
-        free(parameters[i]);
-        parameters[i] = NULL;
-      } else {
-        child_in_fg = true;
-      }
+    // Checking for & character at end of command
+    if (!strcmp(parameters[arg_count], "&")) {
+      child_in_fg = false;
+      free(parameters[arg_count]);
+      parameters[arg_count] = NULL;
+    } else {
+      child_in_fg = true;
     }
     
     if ((child_pid = fork()) == -1) { // Fork error
