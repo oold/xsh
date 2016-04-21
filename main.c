@@ -20,8 +20,6 @@ void free_parameters(char **parameters);
 
 int main() {
   char *parameters[PARAMETERS_SIZE];
-  pid_t child_pid;
-  bool child_in_fg;
   
   setlocale(LC_ALL, "");
   
@@ -33,6 +31,8 @@ int main() {
   open_log();
   
   while (1) {
+    pid_t child_pid;
+    bool child_in_fg;
     size_t arg_count;
     
     read_command(parameters, &arg_count);
