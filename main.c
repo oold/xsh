@@ -16,11 +16,10 @@
 #include "signals.h"
 #include "log.h"
 
-void free_parameters();
-
-char *parameters[PARAMETERS_SIZE];
+void free_parameters(char **parameters);
 
 int main() {
+  char *parameters[PARAMETERS_SIZE];
   pid_t child_pid;
   bool child_in_fg;
   
@@ -33,7 +32,6 @@ int main() {
   signal(SIGINT, sigint_handler);
   signal(SIGCHLD, sigchld_handler);
   atexit(close_log);
-  atexit(free_parameters);
   
   open_log();
   
@@ -49,7 +47,7 @@ int main() {
       if (chdir(parameters[1]) == -1) {
         fputs("Could not change directory", stderr);
       }
-      free_parameters();
+      free_parameters(parameters);
       continue;
     }
     
@@ -77,11 +75,11 @@ int main() {
       printf("[%d]\n", child_pid);
     }
     
-    free_parameters();
+    free_parameters(parameters);
   }
 }
 
-void free_parameters() {
+void free_parameters(char **parameters) {
   size_t i = 0;
   while (i < PARAMETERS_SIZE && parameters[i] != NULL) {
     free(parameters[i++]);
