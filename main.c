@@ -41,7 +41,9 @@ int main() {
 #pragma GCC diagnostic pop
     
     if (!strcmp(parameters[0], "cd")) { // Change directory
-      if (chdir(parameters[1]) == -1) {
+      if (parameters[2] != NULL) {
+        fputs("Too many arguments for cd! Only one is supported.\n", stderr);
+      } else if (chdir(parameters[1]) == -1) {
         fputs("Could not change directory", stderr);
       }
       free_parameters(parameters);
