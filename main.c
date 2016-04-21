@@ -25,9 +25,6 @@ int main() {
   
   setlocale(LC_ALL, "");
   
-  // Setting pointers to null
-  memset(parameters, 0, (PARAMETERS_SIZE) * sizeof(*parameters));
-  
   // Set signal handlers and at-exit function calls up
   signal(SIGINT, sigint_handler);
   signal(SIGCHLD, sigchld_handler);
@@ -84,5 +81,4 @@ void free_parameters(char **parameters) {
   while (i < PARAMETERS_SIZE && parameters[i] != NULL) {
     free(parameters[i++]);
   }
-  memset(parameters, 0, i * sizeof(*parameters));
 }

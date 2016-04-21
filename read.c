@@ -18,6 +18,7 @@ void read_command(char **par) {
   while (1) {
     par[i] = malloc(COMMAND_LENGTH * sizeof(char));
     if (read_str(par[i]) == '\n') {
+      par[i + 1] = NULL;
       break;
     }
     if (++i == PARAMETERS_SIZE - 1) {
