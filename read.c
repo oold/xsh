@@ -48,7 +48,7 @@ char read_str(char **str) {
       arr_size *= 2;
       *str = realloc(*str, arr_size * sizeof(**str));
       if (!*str) {
-        fputs("Could not allocate enough memory for arguments\n", stderr);
+        fputs("Could not allocate enough memory for argument\n", stderr);
         exit(EXIT_FAILURE);
       }
     }
