@@ -5,5 +5,7 @@
 #pragma once
 
 #define APP_NAME "xsh"
-#define COMMAND_LENGTH 20
-#define PARAMETERS_SIZE 60
+// Initial size of command and arguments
+#define COMMAND_LENGTH 16
+// Initial size of array holding pointers to parameters
+#define PARAMETERS_SIZE 4
