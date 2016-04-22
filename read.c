@@ -12,18 +12,23 @@
 
 char read_str(char **str);
 
-void read_command(char **par, size_t *argc) {
+void read_command(char ***par, size_t *argc) {
   print_prompt();
   *argc = 0;
+  size_t arr_size = PARAMETERS_SIZE;
   while (1) {
-    par[*argc] = malloc(COMMAND_LENGTH * sizeof(**par));
-    if (read_str(&par[*argc]) == '\n') {
-      par[*argc + 1] = NULL;
+    (*par)[*argc] = malloc(COMMAND_LENGTH * sizeof(***par));
+    if (read_str(&(*par)[*argc]) == '\n') {
+      (*par)[*argc + 1] = NULL;
       break;
     }
-    if (++*argc == PARAMETERS_SIZE - 1) {
-      fputs("Too many parameters!\n", stderr);
-      exit(EXIT_FAILURE);
+    if (++*argc == arr_size - 1) {
+      arr_size *= 2;
+      *par = realloc(*par, arr_size * sizeof(**par));
+      if (!*par) {
+        fputs("Could not allocate enough memory for arguments\n", stderr);
+        exit(EXIT_FAILURE);
+      }
     }
   }
 }

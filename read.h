@@ -6,4 +6,4 @@
 
 #include "config.h"
 
-void read_command(char **par, size_t *argc);
+void read_command(char ***par, size_t *argc);

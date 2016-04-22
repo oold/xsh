@@ -16,10 +16,10 @@
 #include "signals.h"
 #include "log.h"
 
-void free_parameters(char **parameters);
+void reset_parameters(char ***parameters);
 
 int main() {
-  char *parameters[PARAMETERS_SIZE];
+  char **parameters = malloc(PARAMETERS_SIZE * sizeof(*parameters));
   
   setlocale(LC_ALL, "");
   
@@ -35,7 +35,7 @@ int main() {
     bool child_in_fg;
     size_t arg_count;
     
-    read_command(parameters, &arg_count);
+    read_command(&parameters, &arg_count);
     
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wincompatible-pointer-types-discards-qualifiers"
@@ -48,7 +48,7 @@ int main() {
       } else if (chdir(parameters[1]) == -1) {
         fputs("Could not change directory", stderr);
       }
-      free_parameters(parameters);
+      reset_parameters(&parameters);
       continue;
     }
     
@@ -73,13 +73,14 @@ int main() {
       printf("[%d]\n", child_pid);
     }
     
-    free_parameters(parameters);
+    reset_parameters(&parameters);
   }
 }
 
-void free_parameters(char **parameters) {
+void reset_parameters(char ***parameters) {
   size_t i = 0;
-  while (i < PARAMETERS_SIZE && parameters[i] != NULL) {
-    free(parameters[i++]);
+  while ((*parameters)[i] != NULL) {
+    free((*parameters)[i++]);
   }
+  *parameters = realloc(*parameters, PARAMETERS_SIZE * sizeof(**parameters));
 }
