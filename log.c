@@ -23,7 +23,7 @@ void open_log() {
     strcat(log_name, ".log");
     log_file = fopen(log_name, "a");
   } else {
-    fputs("WARNING: Could not retrieve time, using generic log file name",
+    fputs("WARNING: Cannot retrieve time, using generic log file name\n",
       stderr);
     log_file = fopen(APP_NAME ".log", "a");
   }
@@ -73,7 +73,7 @@ void log_time() {
   char time_str[TIME_STRLEN_DATE_AND_TIME];
   get_time_str(time_str, TIME_STRLEN_DATE_AND_TIME, TIME_FORMAT_DATE_AND_TIME);
   if (!*time_str) {
-    fputs("WARNING: Could not retrieve time\n", stderr);
+    fputs("WARNING: Cannot retrieve time\n", stderr);
     return;
   }
   fprintf(log_file, "[%s] ", time_str);

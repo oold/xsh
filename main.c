@@ -46,7 +46,7 @@ int main() {
       if (parameters[2] != NULL) {
         fputs("Too many arguments for cd! Only one is supported.\n", stderr);
       } else if (chdir(parameters[1]) == -1) {
-        fputs("Could not change directory", stderr);
+        fputs("Cannot not change directory\n", stderr);
       }
       reset_parameters(&parameters);
       continue;

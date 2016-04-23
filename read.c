@@ -26,7 +26,7 @@ void read_command(char ***par, size_t *argc) {
       arr_size *= 2;
       *par = realloc(*par, arr_size * sizeof(**par));
       if (!*par) {
-        fputs("Could not allocate enough memory for arguments\n", stderr);
+        fputs("Cannot allocate enough memory for arguments\n", stderr);
         exit(EXIT_FAILURE);
       }
     }
@@ -48,7 +48,7 @@ char read_str(char **str) {
       arr_size *= 2;
       *str = realloc(*str, arr_size * sizeof(**str));
       if (!*str) {
-        fputs("Could not allocate enough memory for argument\n", stderr);
+        fputs("Cannot allocate enough memory for argument\n", stderr);
         exit(EXIT_FAILURE);
       }
     }
