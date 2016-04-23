@@ -19,9 +19,11 @@
 void reset_parameters(char ***parameters);
 
 int main() {
-  char **parameters = malloc(PARAMETERS_SIZE * sizeof(*parameters));
-  
   setlocale(LC_ALL, "");
+  
+  puts("Welcome to the " APP_NAME " shell!");
+  
+  char **parameters = malloc(PARAMETERS_SIZE * sizeof(*parameters));
   
   // Set signal handlers and at-exit function calls up
   signal(SIGINT, sigint_handler);
