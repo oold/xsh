@@ -21,10 +21,11 @@ void get_time_str(char *str, size_t limit, const char *format) {
 }
 
 void print_prompt() {
-  char wd[4096];
-  if (!getcwd(wd, 4096)) {
+  char *wd;
+  if (!(wd = getcwd(NULL, 0))) {
     fputs("Cannot get path name\n", stderr);
     exit(EXIT_FAILURE);
   }
   printf("%s> ", wd);
+  free(wd);
 }
