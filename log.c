@@ -52,7 +52,6 @@ void log_command(const char *const *params) {
     return;
   }
   log_time();
-  fputs("Command was entered: ", log_file);
   size_t i = 0;
   while (1) {
     fputs(params[i], log_file);
