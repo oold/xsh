@@ -38,11 +38,7 @@ int main() {
     size_t arg_count;
     
     read_command(&parameters, &arg_count);
-    
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wincompatible-pointer-types-discards-qualifiers"
     log_command(parameters);
-#pragma GCC diagnostic pop
     
     if (wasInterrupted) { // In case the user interrupted us
       if (parameters[0][0] == 'y' || parameters[0][0] == 'Y') {
