@@ -31,6 +31,7 @@ void open_log() {
     fputs("WARNING: Cannot open log file\n", stderr);
     return;
   }
+  fputs("---\n", log_file);
   log_time();
   fputs("Opened log file.\n", log_file);
 }
@@ -41,7 +42,7 @@ void close_log() {
     return;
   }
   log_time();
-  fputs("Closing log file.\n", log_file);
+  fputs("Closing log file.\n---\n", log_file);
   fclose(log_file);
   log_file = NULL;
 }
