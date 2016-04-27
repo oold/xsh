@@ -44,6 +44,15 @@ int main() {
     log_command(parameters);
 #pragma GCC diagnostic pop
     
+    if (wasInterrupted) { // In case the user interrupted us
+      if (parameters[0][0] == 'y' || parameters[0][0] == 'Y') {
+        exit(EXIT_SUCCESS);
+      }
+      wasInterrupted = false;
+      reset_parameters(&parameters);
+      continue;
+    }
+    
     if (!strcmp(parameters[0], "cd")) { // Change directory
       if (parameters[2] != NULL) {
         fputs("Too many arguments for cd! Only one is supported.\n", stderr);
