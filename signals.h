@@ -8,7 +8,7 @@
 
 #include "config.h"
 
-extern bool wasInterrupted;
+extern bool was_interrupted;
 
 void sigint_handler(int param);
 void sigchld_handler(int param);

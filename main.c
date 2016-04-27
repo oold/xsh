@@ -40,11 +40,11 @@ int main() {
     read_command(&parameters, &arg_count);
     log_command(parameters);
     
-    if (wasInterrupted) { // In case the user interrupted us
+    if (was_interrupted) { // In case the user interrupted us
       if (parameters[0][0] == 'y' || parameters[0][0] == 'Y') {
         exit(EXIT_SUCCESS);
       }
-      wasInterrupted = false;
+      was_interrupted = false;
       reset_parameters(&parameters);
       continue;
     }

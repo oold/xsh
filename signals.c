@@ -11,12 +11,12 @@
 #include "signals.h"
 #include "util.h"
 
-bool wasInterrupted = false;
+bool was_interrupted = false;
 
 void sigint_handler(int param) {
   printf("\nDo you want to quit? (y/n) ");
   fflush(stdout);
-  wasInterrupted = true;
+  was_interrupted = true;
 }
 
 void sigchld_handler(int param) {
