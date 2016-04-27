@@ -4,20 +4,19 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <stdbool.h>
 #include <sys/wait.h>
 
 #include "config.h"
 #include "signals.h"
 #include "util.h"
 
+bool wasInterrupted = false;
+
 void sigint_handler(int param) {
   printf("\nDo you want to quit? (y/n) ");
-  char ch = getchar();
-  if (ch == 'y' || ch == 'Y')
-    exit(EXIT_SUCCESS);
-  fseek(stdin, 0, SEEK_END);
-  print_prompt();
   fflush(stdout);
+  wasInterrupted = true;
 }
 
 void sigchld_handler(int param) {
