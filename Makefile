@@ -1,5 +1,5 @@
 CC = /usr/bin/gcc
-CFLAGS = -Wall -Wpedantic
+CFLAGS = -Wall
 NAME = xsh
 CFILES = main.c read.c signals.c log.c util.c
 OLEVEL = 3
