@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <termios.h>
 
 #include "config.h"
 #include "read.h"
@@ -13,6 +14,7 @@
 char read_str(char **str);
 
 void read_command(char ***par, size_t *argc) {
+  tcflush(0, TCIFLUSH);
   print_prompt();
   *argc = 0;
   size_t arr_size = PARAMETERS_SIZE;
