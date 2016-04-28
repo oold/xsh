@@ -19,6 +19,10 @@ void sigint_handler(int param) {
   was_interrupted = true;
 }
 
+void sigint_child_in_fg_handler(int param) {
+  puts("");
+}
+
 void sigchld_handler(int param) {
   while (waitpid(-1, NULL, WNOHANG) > 0);
 }

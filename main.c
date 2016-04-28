@@ -75,7 +75,9 @@ int main() {
       execvp(parameters[0], parameters);
       _exit(EXIT_FAILURE);
     } else if (child_in_fg) { // Parent with child in foreground
+      signal(SIGINT, sigint_child_in_fg_handler);
       waitpid(child_pid, NULL, WUNTRACED | WCONTINUED);
+      signal(SIGINT, sigint_handler);
     } else { // Parent with child in background
       printf("[%d]\n", child_pid);
     }

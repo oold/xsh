@@ -11,4 +11,5 @@
 extern bool was_interrupted;
 
 void sigint_handler(int param);
+void sigint_child_in_fg_handler(int param);
 void sigchld_handler(int param);
